@@ -1,0 +1,24 @@
+hello;hi;hey|Hello sir/madam, how are you doing today?
+good;doing well;doing ok;doing okay|Great, how may I help you today?
+how are you;good how are you|I am doing well thank you. How may I help you today?
+bad;not well;not doing well|That is rather unfortunate. Hopefully our wide selection of high quality shoes can cheer you up. So how may I help you today?
+purchase;buy|What type are you looking for?
+what do you have;what types;what type;available;|Along with the Originals, we have shoes for running, soccer, basketball, skateboarding, sandals & slides, weightlifting, outdoors, training, golf and tennis.
+originals;original;purchase original;buy original|Here are the Originals that we have: <br>print(getShoesFromSearchQuery("originals shoes"))<br> Please type the shoe number that you want to purchase.
+running;run;purchase run;buy run|Here are the running shoes that we have: <br>print(getShoesFromSearchQuery("running shoes"))<br> Please type the shoe number that you want to purchase.
+soccer;football;purchase soccer;buy soccer;buy football;buy soccer|Here are the soccer shoes that we have: <br>print(getShoesFromSearchQuery("soccer shoes"))<br> Please type the shoe number that you want to purchase.
+basketball;purchase basketball;buy basketball|Here are the basketball shoes that we have: <br>print(getShoesFromSearchQuery("basketball shoes"))<br> Please type the shoe number that you want to purchase.
+skateboarding;skateboard;purchase skateboard;buy skateboard|Here are the skateboarding shoes that we have: <br>print(getShoesFromSearchQuery("skateboarding shoes"))<br> Please type the shoe number that you want to purchase.
+sandals;slides;purchase sandals;buy sandals|Here are the sandals & slides shoes that we have: <br>print(getShoesFromSearchQuery("sandals & slides shoes"))<br> Please type the shoe number that you want to purchase.
+weightlifting;weightlift;purchase weightlift;buy weightlift|Here are the weightlifting shoes that we have: <br>print(getShoesFromSearchQuery("weightlifting shoes"))<br> Please type the shoe number that you want to purchase.
+outdoor;outside;purchase out;buy out|Here are the outdoor shoes that we have: <br>print(getShoesFromSearchQuery("outdoor shoes"))<br> Please type the shoe number that you want to purchase.
+training;trainer;purchase train;buy train|Here are the training shoes that we have: <br>print(getShoesFromSearchQuery("training shoes"))<br> Please type the number that you want to purchase.
+golf;purchase golf;buy golf|Here are the golf shoes that we have: <br>print(getShoesFromSearchQuery("golf shoes"))<br> Please type the shoe number that you want to purchase.
+tennis;purchase tennis;buy tennis|Here are the tennis shoes that we have: <br>print(getShoesFromSearchQuery("tennis shoes"))<br> Please type the shoe number that you want to purchase.
+size;sizes|These are the sizes available for this shoe.
+colour;color|These are the colours available for this shoe.
+price;cost;how much|The price of this shoe is
+review;reviews|Here are the reviews for this shoe.
+add item;add to cart|Item has been added to cart.
+remove item;remove from cart|Item has been removed from cart.
+sub-total;subtotal;total|The subtotal of the current items in the cart is
