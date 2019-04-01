@@ -8,6 +8,9 @@ import com.google.gson.JsonParser;
 
 import net.jhavar.http.HttpGet;
 
+//import java.util.regex.Pattern;
+//import java.util.regex.Matcher;
+
 /**
  * 
  * An object that links the program with a shoe search API.
@@ -52,11 +55,14 @@ public class ShoeAPI {
 	private static String getShoes(int numShoes) {
 		StringBuilder result = new StringBuilder();
 		
+		
 		//Make sure numShoes does not exceed shoes.length.
 		numShoes = numShoes > shoes.length ? shoes.length : numShoes;
 		for(int i = 0; i < numShoes; i++) {
 			result.append(String.format(i+1 + ") Shoe: %s, Price: %d\n", shoes[i].getDisplayName(), shoes[i].getPrice()));
-			result.append("URL: https://www.adidas.ca/en" + shoes[i].getProductUrl() + "\n");
+			//String hyperlink = "<a href='" + shoes[i].getProductUrl() + "'>" +"https://www.adidas.ca/en" + "</a>"; //changed
+			//result.append("URL: https://www.adidas.ca/en "+ hyperlink + "\n"); //changed
+			result.append("URL: https://www.adidas.ca/en "+ shoes[i].getProductUrl() + "\n");
 		}
 		
 		return result.toString();
