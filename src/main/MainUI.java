@@ -4,21 +4,28 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+//import javax.swing.JEditorPane; //changed
 
+import core.app.Shoe;
 import core.communication.AnswerGenerator;
 import core.ui.UI;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 
 public class MainUI {
-	
+
 	private JFrame frmShoechatbot;
 	private JTextField txtMessage;
+	// private JEditorPane pane; //changed
 
 	/**
 	 * Launch the application.
@@ -38,25 +45,36 @@ public class MainUI {
 
 	/**
 	 * Create the application.
-	 * @throws IOException 
+	 * 
+	 * @throws SocketException
+	 * @throws UnknownHostException
+	 * @throws IOException
 	 */
-	public MainUI() {
+	public MainUI() throws SocketException, UnknownHostException {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws SocketException 
+	 * @throws UnknownHostException 
 	 * @throws IOException 
 	 */
-	private void initialize() {
+	private void initialize() throws SocketException, UnknownHostException {
 		//Load answers first thing
 		AnswerGenerator.loadAnswers();
 		
 		frmShoechatbot = new JFrame();
+		
+		//pane = new JEditorPane(); //changed
+		//pane.setContentType("text/html"); //changed
+		//frmShoechatbot.add(pane); //changed
+		
 		frmShoechatbot.setTitle("ShoeChatBot");
 		frmShoechatbot.setBounds(100, 100, 711, 345);
 		frmShoechatbot.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmShoechatbot.getContentPane().setLayout(null);
+		
 		
 		txtMessage = new JTextField();
 		txtMessage.setBounds(10, 254, 675, 20);
@@ -78,22 +96,72 @@ public class MainUI {
 		
 		UI.setChatBox(txtChat);
 		
-		btnSend.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String q;
-				//Add the message the user sends to chat when button pressed
-				UI.addMessageToChat((q = txtMessage.getText()), "You");
-				//Reset message box
-				txtMessage.setText("");
-				//Generate response
-				if(!q.startsWith("!")) {
-					System.out.println(q);
-					UI.addMessageToChat(AnswerGenerator.evalQuestion(q), "Bot");
-				} else if(q.equals("!clear")) {
-					txtChat.setText("");
-				}
-				
-			}
-		});		
-	}
-}
+		Thread serverThread = new EchoServer();//changed
+		serverThread.start();//changed
+		EchoClient client1 = new EchoClient();//changed
+		EchoClient client2 = new EchoClient();//changed
+		
+		UI.addMessageToChat("Press 1 for Normal Functionality, Press 2 for two chatbot Convo", "Bot");
+			btnSend.addActionListener(new ActionListener() {
+				boolean Norm = false;
+				public void actionPerformed(ActionEvent e) {
+					System.out.println(txtMessage.getText());
+					if(Norm == false && (Integer.parseInt(txtMessage.getText())== 1))
+					{
+						Norm =true;
+						
+					}
+					if(Norm)
+					{
+						
+						String q;	
+						//Add the message the user sends to chat when button pressed
+						UI.addMessageToChat((q = txtMessage.getText()), "You");
+						//Reset message box
+						txtMessage.setText("");	
+							//Generate response
+							if(!q.startsWith("!")) 
+							{
+								System.out.println(q);
+								UI.addMessageToChat(AnswerGenerator.evalQuestion(q), "Bot");
+							} 
+							else if(q.equals("!clear")) 
+							{
+								txtChat.setText("");
+							}
+					}
+						else if(Norm == false)
+						{
+							String msg= "";
+							txtMessage.setText("");
+							while(msg !="end")
+							{
+								try {
+									msg = client1.sendEcho(AnswerGenerator.evalQuestion(msg));
+									UI.addMessageToChat(msg, "Client1");
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								try {
+									msg = client2.sendEcho(AnswerGenerator.evalQuestion(msg));
+									UI.addMessageToChat(msg, "Client2");
+									long current = System.currentTimeMillis();
+									while(System.currentTimeMillis()-current < 1000);
+								} catch (IOException  | NullPointerException e2) {
+									// TODO Auto-generated catch block
+									msg = "end";
+									e2.printStackTrace();
+								}
+							}
+						}
+					client1.close();
+					client2.close();
+						
+					}	
+				});
+			
+			}		
+		}
+
+
