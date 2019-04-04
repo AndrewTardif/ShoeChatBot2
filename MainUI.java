@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 //import javax.swing.JEditorPane; //changed
 
-//import core.app.Shoe;
+import core.app.Shoe;
 import core.communication.AnswerGenerator;
 import core.ui.UI;
 
@@ -15,8 +15,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-//import java.util.Scanner;
-//import java.util.concurrent.TimeUnit;
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
@@ -99,7 +99,7 @@ public class MainUI {
 		Thread serverThread = new EchoServer();//changed
 		serverThread.start();//changed
 		EchoClient client1 = new EchoClient();//changed
-		//EchoClient client2 = new EchoClient();//changed
+		EchoClient client2 = new EchoClient();//changed
 		
 		UI.addMessageToChat("Press 1 for Normal Functionality, Press 2 for two chatbot Convo", "Bot");
 			btnSend.addActionListener(new ActionListener() {
@@ -150,7 +150,7 @@ public class MainUI {
 							}
 						}
 					client1.close();
-					//client2.close();
+					client2.close();
 						
 					}	
 				});
