@@ -10,13 +10,13 @@ Things i Changed
 
 1. Added Client and Server Classes to use sockets with
 
- -Adds additional Functionality beyond regular shoe chatbot Normaly functionality
+        -Adds additional Functionality beyond regular shoe chatbot Normaly functionality
  
 2. Attempt at hyperlinking code for Html's(failed and commented out)
 3. Changes to Answer Generator for utilizing both the shoechatbot functionality and Socket conversation
 4. Add psudo switch statement to switch between modes at the begining
 
- -Helps user decide what they want to use the program for
+        -Helps user decide what they want to use the program for
 
 
 Snippet of normal use with first line changed to choose between "Normal Functionality" and "Chatbot talking to itself via Sockets"
